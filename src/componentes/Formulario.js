@@ -1,6 +1,6 @@
 import {useState,Fragment} from 'react';
-import PropTypes from 'prop-types';
 
+import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import Swal from 'sweetalert2';
 
