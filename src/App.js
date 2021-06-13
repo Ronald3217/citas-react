@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Swal from 'sweetalert2';
 
 import Formulario from './componentes/Formulario'
 import Listado from './componentes/Listado'
@@ -9,20 +10,41 @@ function App() {
   if (!citasIniciales){
     citasIniciales = [];
   }
-  const [citas, actualizarCitas] = useState(citasIniciales)
+  const [citas, actualizarCitas] = useState(citasIniciales);
 
   useEffect(()=>{
     if(citasIniciales){
-      localStorage.setItem('citas',JSON.stringify(citas))
+      localStorage.setItem('citas',JSON.stringify(citas));
     } else {
-      localStorage.setItem('citas',JSON.stringify([]))
+      localStorage.setItem('citas',JSON.stringify([]));
     }
-  },[citas,citasIniciales])
+  },[citas,citasIniciales]);
 
   //Funcion para eliminar la cita
   const eliminarCita = id => {
-    const filtradas = citas.filter(cita => cita.id !== id)
-    actualizarCitas(filtradas)
+
+    Swal.fire({
+    title: 'Eliminar Cita',
+    text: "Estas seguro que quieres eliminar la cita seleccionada?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, eliminar!',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      
+      const filtradas = citas.filter(cita => cita.id !== id);
+      actualizarCitas(filtradas);
+      Swal.fire(
+        'Eliminada!',
+        'La cita ha sido eliminada.',
+        'success'
+      )
+    }
+  })
+
   }
 
   const titulo = citas.length===0 ? 'No Hay Citas' : 'Administra Tus Citas' 

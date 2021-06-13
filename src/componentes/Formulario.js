@@ -1,7 +1,8 @@
-import {useState,Fragment} from 'react'
-import PropTypes from 'prop-types'
+import {useState,Fragment} from 'react';
+import PropTypes from 'prop-types';
 
-import shortid from 'shortid'
+import shortid from 'shortid';
+import Swal from 'sweetalert2';
 
 const Formulario = ({actualizarCitas,citas})=> {
 
@@ -29,14 +30,18 @@ const Formulario = ({actualizarCitas,citas})=> {
               hora.trim()==='' ||
               sintomas.trim()===''
             ){
-        guardarError(true);
+        Swal.fire({
+          icon: 'error',
+          title: 'Ha habido un error...',
+          text: 'Todos los campos son obligatorios!',
+        })
+        // guardarError(true);
         return
         }
         else { 
         const id = shortid.generate()
         const nuevaCita = { ...cita, id };
         actualizarCitas([...citas,nuevaCita])
-        console.log(nuevaCita)
         actualizarCita({
           mascota:'',
           propietario: '',
