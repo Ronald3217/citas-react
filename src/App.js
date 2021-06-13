@@ -24,8 +24,8 @@ function App() {
   const eliminarCita = id => {
 
     Swal.fire({
-    title: 'Eliminar Cita',
-    text: "Estas seguro que quieres eliminar la cita seleccionada?",
+    title: 'Deseas Eliminar la Cita seleccionada?',
+    text: "Una cita eliminada no se puede recuperar.",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
